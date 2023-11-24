@@ -31,7 +31,7 @@ namespace Script.ActionScript
             _movementEventController.LookForwardEvent += LookForward;
         }
 
-        private void LateUpdate()
+        private void FixedUpdate()
         {
             MoveToward(_moveDirection != Vector2.zero ? _moveDirection : Vector2.zero);
         }

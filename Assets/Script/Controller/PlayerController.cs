@@ -1,3 +1,4 @@
+using Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -14,6 +15,7 @@ namespace Script.Controller
         /// </summary>
         private void Awake()
         {
+            // 기존 카메라를 Virtual Camera 로 대체
             _camera = Camera.main;
         }
 
@@ -39,13 +41,13 @@ namespace Script.Controller
         {
             // 매개변수로 받은 벨류값에서 Vector2를 찾음
             Vector2 lookValue = value.Get<Vector2>();
-
+        
             // 마우스 좌표는 카메라의 좌표와는 다르기 때문에 혀재 스크린의 좌표로 변환
-            Vector2 worldPos = _camera.ScreenToWorldPoint(lookValue);
-
+            // Vector2 worldPos = _camera.ScreenToWorldPoint(lookValue);
+            Vector2 worldPos = _camera.ScreenToWorldPoint(new Vector3(lookValue.x, lookValue.y, _camera.nearClipPlane));
             // 카메라의 값과, 실제 오브젝트의 vector 값을 비교하여 정규화 하여 보장된 상대적 좌표 값을 반환
             Vector2 relativeLookValue = (worldPos - (Vector2)transform.position).normalized;
-
+        
             if (relativeLookValue.magnitude >= 0.9f)
             {
                 // 이벤트 호출
