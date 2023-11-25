@@ -11,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/1.Script/InputText/InputText.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/1.Script/LoginPanel/CharacterCard.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_SubMeshUI.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2YcKO38ORwjNSZ2qjCSwQ84eAHm" />
@@ -87,7 +87,9 @@
       <updated>1700819392661</updated>
       <workItem from="1700819394484" duration="5309000" />
       <workItem from="1700828552190" duration="10654000" />
-      <workItem from="1700898927001" duration="7156000" />
+      <workItem from="1700898927001" duration="7194000" />
+      <workItem from="1700934406392" duration="249000" />
+      <workItem from="1700934672454" duration="7927000" />
     </task>
     <servers />
   </component>

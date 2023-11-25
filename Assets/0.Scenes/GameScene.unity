@@ -179,18 +179,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 5301313720926982700, guid: cc8861cb02c5149738b108b5a02c4fcc, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 446437d1bff5c4508bdbccc1eca8c23f, type: 2}
-    - target: {fileID: 5301313720926982700, guid: cc8861cb02c5149738b108b5a02c4fcc, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -1739093130626355454, guid: 446437d1bff5c4508bdbccc1eca8c23f, type: 2}
-    - target: {fileID: 5301313720926982700, guid: cc8861cb02c5149738b108b5a02c4fcc, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9203903673669211705, guid: cc8861cb02c5149738b108b5a02c4fcc, type: 3}
       propertyPath: m_Name
       value: Character
@@ -583,6 +571,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 562fb85d987bd4d1d9a87227e55f3c00, type: 3}
+--- !u!1 &2093657636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2093657638}
+  - component: {fileID: 2093657637}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2093657637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093657636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f7ff9ee149546d7b8c2572eb0f230f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2093657638
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2093657636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 941.5788, y: 795.4251, z: -7.3594255}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2100263580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -679,7 +711,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 6767401496699627789, guid: fd8e6d28f9ca640b6b483ea8c7602dcd, type: 3}
+    - target: {fileID: 7594239975458221643, guid: fd8e6d28f9ca640b6b483ea8c7602dcd, type: 3}
       propertyPath: characterName
       value: 
       objectReference: {fileID: 1030010355}

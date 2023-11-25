@@ -1,4 +1,5 @@
 using _1.Script.Controller;
+using UnityEditor.Animations;
 using UnityEngine;
 
 namespace _1.Script.ActionScript
@@ -33,8 +34,20 @@ namespace _1.Script.ActionScript
         {
             _movementEventController.MoveEvent += Move;
             _movementEventController.LookForwardEvent += LookForward;
-            _trigger = Triggers.IDLE;
+            GameManager.Instance.OnCharacterControllerChanged += UpdateAnimatorController;
+            CharacterInitialize();
+        }
+
+        private void UpdateAnimatorController(AnimatorController newController)
+        {
+            animator.runtimeAnimatorController = newController;
+        }
+
+        private void CharacterInitialize()
+        {
+            animator.runtimeAnimatorController = GameManager.Instance.CharacterController;
             animator.SetTrigger(_trigger.ToString());
+            _trigger = Triggers.IDLE;
         }
 
         private void FixedUpdate()
