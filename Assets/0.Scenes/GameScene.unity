@@ -679,14 +679,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 5097734328350341250, guid: fd8e6d28f9ca640b6b483ea8c7602dcd, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnInputFieldEndEdit
-      objectReference: {fileID: 0}
-    - target: {fileID: 5097734328350341250, guid: fd8e6d28f9ca640b6b483ea8c7602dcd, type: 3}
-      propertyPath: m_OnEndEdit.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: _1.Script.InputText.InputText, Assembly-CSharp
-      objectReference: {fileID: 0}
     - target: {fileID: 6767401496699627789, guid: fd8e6d28f9ca640b6b483ea8c7602dcd, type: 3}
       propertyPath: characterName
       value: 

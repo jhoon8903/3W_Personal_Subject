@@ -14,6 +14,7 @@ namespace _1.Script.InputText
         {
             _inputPanel = GetComponent<Image>();
             entranceBtn.onClick.AddListener(ClosePanel);
+            entranceBtn.interactable = false;
         }
 
         private void Start()
@@ -29,6 +30,7 @@ namespace _1.Script.InputText
         public void OnInputFieldEndEdit(string value)
         {
             characterName.text = value;
+            entranceBtn.interactable = value.Length is >= 2 and < 10;
         }
     }
 }
