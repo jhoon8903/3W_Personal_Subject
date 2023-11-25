@@ -23,7 +23,6 @@ namespace Script.ActionScript
         [SerializeField] private Animator animator;
         private enum Triggers { MOVE, IDLE }
         private Triggers _trigger;
-
         #endregion
 
         private void Awake()
@@ -62,7 +61,6 @@ namespace Script.ActionScript
             animator.SetTrigger(_trigger.ToString());
             Vector2 direction = moveDirection * speed;
             _rigidbody2D.velocity = direction;
-
         }
     }
 }
