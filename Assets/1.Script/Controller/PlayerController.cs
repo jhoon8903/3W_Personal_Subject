@@ -45,7 +45,7 @@ namespace _1.Script.Controller
             Vector2 worldPos = _camera.ScreenToWorldPoint(new Vector3(lookValue.x, lookValue.y, _camera.nearClipPlane));
             // 카메라의 값과, 실제 오브젝트의 vector 값을 비교하여 정규화 하여 보장된 상대적 좌표 값을 반환
             Vector2 relativeLookValue = (worldPos - (Vector2)transform.position).normalized;
-        
+
             if (relativeLookValue.magnitude >= 0.9f)
             {
                 // 이벤트 호출

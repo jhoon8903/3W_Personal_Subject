@@ -18,14 +18,12 @@ namespace _1.Script.Controller
         }
 
         /// <summary>
-        ///  케리터가 이도할때 마우스 또는 입력값에 따라 좌우 방향으로 바라보는 이벤트 메서드
+        ///  케릭터가 이동할때 마우스 또는 입력값에 따라 좌우 방향으로 바라보는 이벤트 메서드
         /// </summary>
         /// <param name="value">좌 우 를 기준으로 바뀌는 Vector2 값</param>
         protected void CallLookForwardEvent(Vector2 value)
         {
             LookForwardEvent?.Invoke(value);
         }
-
-
     }
 }
