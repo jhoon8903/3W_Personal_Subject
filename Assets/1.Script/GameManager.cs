@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using _1.Script.InGameUI;
-using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
 using CharacterTypes = _1.Script.LoginPanel.CharacterCard.Character.CharacterTypes;

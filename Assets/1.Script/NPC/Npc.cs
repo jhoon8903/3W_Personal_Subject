@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using _1.Script.InGameUI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _1.Script.NPC
 {
@@ -23,6 +20,11 @@ namespace _1.Script.NPC
         }
 
         private void Start()
+        {
+            SetUpNpc();
+        }
+
+        private void SetUpNpc()
         {
             GameManager.Instance.User = new Dictionary<string, Sprite>
             {
