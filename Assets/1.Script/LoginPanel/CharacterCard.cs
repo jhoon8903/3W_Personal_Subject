@@ -14,7 +14,7 @@ namespace _1.Script.LoginPanel
         /// </summary>
         [Serializable] public class Character
         {
-            public enum CharacterTypes { FROG, PINKYMAN }   // 케릭터의 유니크 타입 목록
+            public enum CharacterTypes { FROG, PINKYMAN, ZEP }   // 케릭터의 유니크 타입 목록
             public CharacterTypes characterType;    // 케릭터의 유니크 타입값
             public Sprite characterImage;   // 케릭터의 기본 Sprite 
             public AnimatorController animator; // 인게임에서 사용할 케릭터 컨트롤러

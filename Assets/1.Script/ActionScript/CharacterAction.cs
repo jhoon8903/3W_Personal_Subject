@@ -51,7 +51,8 @@ namespace _1.Script.ActionScript
         }
 
         private void FixedUpdate()
-        {
+        { 
+            if (!GameManager.Instance.inGame) return;
             MoveToward(_moveDirection != Vector2.zero ? _moveDirection : Vector2.zero);
         }
 

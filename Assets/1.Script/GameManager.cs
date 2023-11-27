@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using _1.Script.InGameUI;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -29,14 +31,19 @@ namespace _1.Script
         #endregion
 
         #region Character Information Variable
+        public CharacterTypes CharacterType { get; set; }   // 케릭터 타입
         private Sprite _characterThumbnail; // 이미지 변수
         public event Action<Sprite> OnCharacterThumbnailChanged;    // 이미지 변경 이벤트 
         private AnimatorController _characterController;    // 컨트롤러
         public event Action<AnimatorController> OnCharacterControllerChanged;   // 컨트롤러 변경 이벤트
-        public CharacterTypes CharacterType { get; set; }   // 케릭터 타입
         #endregion
 
-        #region Changed Character Information Event Method
+        #region UserInstance Setting
+        private Dictionary<string, Sprite> _user = new Dictionary<string, Sprite>(); //  케릭터 이름 변수
+        public event Action<Dictionary<string, Sprite>> OnUser;   //  이름 세팅 이벤트  
+        #endregion
+
+        #region Changed Character Information Event Property
         /// <summary>
         ///  Thumbnail 변경시 이벤트 변경
         /// </summary>
@@ -62,6 +69,22 @@ namespace _1.Script
                 OnCharacterControllerChanged?.Invoke(_characterController);
             }
         }
+
+        /// <summary>
+        ///     케릭터 이름 세팅 프로퍼티 및 이벤트 실행
+        /// </summary>
+        public Dictionary<string, Sprite> User
+        {
+            set
+            {
+                _user = value;
+                OnUser?.Invoke(_user);
+            }
+        }
+        #endregion
+
+        #region Reject Move
+        public bool inGame = false;
         #endregion
     }
 }

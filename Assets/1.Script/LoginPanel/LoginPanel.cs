@@ -1,6 +1,7 @@
+using System.Collections.Generic;
+using _1.Script.InGameUI;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _1.Script.LoginPanel
@@ -34,38 +35,6 @@ namespace _1.Script.LoginPanel
         }
         #endregion
 
-
-        #region Input Panel Method Group
-        /// <summary>
-        ///  인풋 필드 초기화
-        /// </summary>
-        private void InitializedInPutField()
-        {
-            _inputPanel = GetComponent<Image>();    // 인풋 패널 할당
-            _inputPanel.gameObject.SetActive(true); // 인풋 패널 오브젝트 활성화
-            entranceBtn.onClick.AddListener(ClosePanel);    // 입장 버튼 이벤트 리스너 구독
-            entranceBtn.interactable = false;   // 버튼의 초기값은 비활성화로 설정
-        }
-
-        /// <summary>
-        ///  인풋 Text를 이벤트로 받아 글자 수에 따라 검증 조건에 따라 버튼 활성화 여부 확인
-        /// </summary>
-        /// <param name="value"></param>
-        public void OnInputFieldEndEdit(string value)
-        {
-            characterName.text = value;
-            entranceBtn.interactable = value.Length is >= 2 and < 10;
-        }
-
-        /// <summary>
-        ///  입장 버튼을 누르면 인풋 패널 비활성화
-        /// </summary>
-        private void ClosePanel()
-        {
-            _inputPanel.gameObject.SetActive(false);    // 인풋 패널을 비활성화 하여 게임씬 노출
-        }
-        #endregion
-
         #region Character Select Method Group
         private void InitializedDefaultCharacter()
         {
@@ -92,6 +61,42 @@ namespace _1.Script.LoginPanel
         {
             characterThumbnail.sprite = sprite;   // 케릭터 이미지 교체 
             characterSelectPanel.gameObject.SetActive(false);   // 케릭터 선택화면 비활성화
+        }
+        #endregion
+
+        #region Input Panel Method Group
+        /// <summary>
+        ///  인풋 필드 초기화
+        /// </summary>
+        private void InitializedInPutField()
+        {
+            _inputPanel = GetComponent<Image>();    // 인풋 패널 할당
+            _inputPanel.gameObject.SetActive(true); // 인풋 패널 오브젝트 활성화
+            entranceBtn.onClick.AddListener(ClosePanel);    // 입장 버튼 이벤트 리스너 구독
+            entranceBtn.interactable = false;   // 버튼의 초기값은 비활성화로 설정
+        }
+
+        /// <summary>
+        ///  인풋 Text를 이벤트로 받아 글자 수에 따라 검증 조건에 따라 버튼 활성화 여부 확인
+        /// </summary>
+        /// <param name="value"></param>
+        public void OnInputFieldEndEdit(string value)
+        {
+            characterName.text = value; // 케릭터 이름 할당
+            entranceBtn.interactable = value.Length is >= 2 and < 10;   // 2자 이상 10자 미만
+            GameManager.Instance.User = new Dictionary<string, Sprite>  // GameManager에 이름과 Sprite를 넘겨 줌
+            {
+                {value, characterThumbnail.sprite}
+            };
+        }
+
+        /// <summary>
+        ///  입장 버튼을 누르면 인풋 패널 비활성화
+        /// </summary>
+        private void ClosePanel()
+        {
+            GameManager.Instance.inGame = true;
+            _inputPanel.gameObject.SetActive(false);    // 인풋 패널을 비활성화 하여 게임씬 노출
         }
         #endregion
     }
