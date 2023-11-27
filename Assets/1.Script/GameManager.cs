@@ -21,23 +21,14 @@ namespace _1.Script
         public event Action<Dictionary<string, Sprite>> OnUser;   //  이름 세팅 이벤트  
         #endregion
 
-        #region Singleton to GameManager
-        public static GameManager Instance { get; private set; }
-
+        #region Service Locator to GameManager
         /// <summary>
-        ///  GameManager 싱글턴 인스턴스 화
+        ///  Service Locator Pattern 구현
         /// </summary>
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-            DontDestroyOnLoad(gameObject);
+            Debug.Log("GameManager.cs - Register Service");
+            ServiceLocator.RegisterService(this);
         }
         #endregion
 

@@ -6,6 +6,7 @@ namespace _1.Script.NPC
 {
     public class Npc : MonoBehaviour
     {
+        private GameManager _gameManager;
         [SerializeField] private string npcNameText = "NPC\n뚱이에오";
         [SerializeField] private TextMeshProUGUI npcName;
         [SerializeField] private Sprite npcSprite;
@@ -21,12 +22,14 @@ namespace _1.Script.NPC
 
         private void Start()
         {
+            _gameManager = ServiceLocator.GetService<GameManager>();
             SetUpNpc();
         }
 
         private void SetUpNpc()
-        {
-            GameManager.Instance.User = new Dictionary<string, Sprite>
+        { 
+            Debug.Log("Npc.cs - SetupNPC Method()");
+            _gameManager.User = new Dictionary<string, Sprite>
             {
                 {npcNameText, npcSprite }
             };

@@ -7,6 +7,8 @@ namespace _1.Script.LoginPanel
 {
     public class CharacterCard : MonoBehaviour
     {
+        private GameManager _gameManager;
+
         #region Character InformationList
         /// <summary>
         ///  Character Class 로 케릭터의 타입(enum), 이미지 (Sprite), 인게임에서 사용할 컨트롤러(AnimatorController) 설정,
@@ -34,10 +36,11 @@ namespace _1.Script.LoginPanel
         /// </summary>
         private void Start()
         {
+            _gameManager = ServiceLocator.GetService<GameManager>();
             Character defaultCharacter = characters[0];
-            GameManager.Instance.CharacterController = defaultCharacter.animator;  // 기본 케릭터 Controller GameManager로 할당
-            GameManager.Instance.CharacterType = defaultCharacter.characterType;   // 기본 케릭터 타입 GameManager로 할당
-            GameManager.Instance.CharacterThumbnail = defaultCharacter.characterImage;  // 기본 케릭터 이미지 GameManager 할당
+            _gameManager.CharacterController = defaultCharacter.animator;  // 기본 케릭터 Controller GameManager로 할당
+            _gameManager.CharacterType = defaultCharacter.characterType;   // 기본 케릭터 타입 GameManager로 할당
+            _gameManager.CharacterThumbnail = defaultCharacter.characterImage;  // 기본 케릭터 이미지 GameManager 할당
             InstantiateSelectCard();    // 선택화면의 케릭터 오브젝트를 인스턴스화
         }
 

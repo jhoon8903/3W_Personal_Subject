@@ -8,6 +8,8 @@ namespace _1.Script.LoginPanel
 {
     public class SelectCard : MonoBehaviour
     {
+        private GameManager _gameManager;
+
         #region Character Card Variables
         // 해당 케릭터가 인스턴화 될 때 설정되는 케릭터 정보
         public CharacterTypes CharacterType { get; set; }
@@ -36,6 +38,7 @@ namespace _1.Script.LoginPanel
         /// </summary>
         private void Start()
         {
+            _gameManager = ServiceLocator.GetService<GameManager>();
             _characterImage.sprite = CharacterSprite;
         }
         #endregion
@@ -47,9 +50,9 @@ namespace _1.Script.LoginPanel
         /// </summary>
         private void Selected()
         {
-            GameManager.Instance.CharacterType = CharacterType;
-            GameManager.Instance.CharacterController = Controller;
-            GameManager.Instance.CharacterThumbnail = CharacterSprite;
+            _gameManager.CharacterType = CharacterType;
+            _gameManager.CharacterController = Controller;                 
+            _gameManager.CharacterThumbnail = CharacterSprite;
         }
         #endregion
     }

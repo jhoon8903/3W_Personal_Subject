@@ -8,6 +8,8 @@ namespace _1.Script.LoginPanel
 {
     public class LoginPanel : MonoBehaviour
     {
+        private GameManager _gameManager;
+
         #region ID Input Variables
         private Image _inputPanel; // 로그인 인풋 패널 (배경)
         [SerializeField] private Button entranceBtn; // 입장 버튼 오브젝트
@@ -27,11 +29,12 @@ namespace _1.Script.LoginPanel
         /// </summary>
         private void Start()
         {
+            _gameManager = ServiceLocator.GetService<GameManager>();
             InitializedInPutField();    // 인풋 필드 초기화
             InitializedDefaultCharacter();  // 케릭터 세팅 초기화 (FROG)
             
             // 케릭터가 선택 되면 해당 케릭터 Sprite를 바꿔주는 이벤트
-            GameManager.Instance.OnCharacterThumbnailChanged += CharacterSelectPanelClose;
+            _gameManager.OnCharacterThumbnailChanged += CharacterSelectPanelClose;
         }
         #endregion
 
@@ -41,7 +44,7 @@ namespace _1.Script.LoginPanel
             // 케릭터 선택 버튼을 클릭하면 케릭터 선택 패널이 열리도록 이벤트 구독
             characterSelectBtn.onClick.AddListener(CharacterSelectPanelOpen);
             // 케릭터 기본 이미지 설정
-            characterThumbnail.sprite = GameManager.Instance.CharacterThumbnail; 
+            characterThumbnail.sprite = _gameManager.CharacterThumbnail; 
         }
 
         /// <summary>
@@ -84,7 +87,7 @@ namespace _1.Script.LoginPanel
         {
             characterName.text = value; // 케릭터 이름 할당
             entranceBtn.interactable = value.Length is >= 2 and < 10;   // 2자 이상 10자 미만
-            GameManager.Instance.User = new Dictionary<string, Sprite>  // GameManager에 이름과 Sprite를 넘겨 줌
+            _gameManager.User = new Dictionary<string, Sprite>  // GameManager에 이름과 Sprite를 넘겨 줌
             {
                 {value, characterThumbnail.sprite}
             };
@@ -95,7 +98,7 @@ namespace _1.Script.LoginPanel
         /// </summary>
         private void ClosePanel()
         {
-            GameManager.Instance.inGame = true;
+            _gameManager.inGame = true;
             _inputPanel.gameObject.SetActive(false);    // 인풋 패널을 비활성화 하여 게임씬 노출
         }
         #endregion

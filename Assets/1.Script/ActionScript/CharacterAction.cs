@@ -6,6 +6,7 @@ namespace _1.Script.ActionScript
 {
     public class CharacterAction  : MonoBehaviour
     {
+        private GameManager _gameManager;
         private MovementEventController _movementEventController;
         
         #region Move Variables
@@ -32,9 +33,10 @@ namespace _1.Script.ActionScript
 
         private void Start()
         {
+            _gameManager = ServiceLocator.GetService<GameManager>();
             _movementEventController.MoveEvent += Move;
             _movementEventController.LookForwardEvent += LookForward;
-            GameManager.Instance.OnCharacterControllerChanged += UpdateAnimatorController;
+            _gameManager.OnCharacterControllerChanged += UpdateAnimatorController;
             CharacterInitialize();
         }
 
@@ -45,14 +47,14 @@ namespace _1.Script.ActionScript
 
         private void CharacterInitialize()
         {
-            animator.runtimeAnimatorController = GameManager.Instance.CharacterController;
+            animator.runtimeAnimatorController = _gameManager.CharacterController;
             animator.SetTrigger(_trigger.ToString());
             _trigger = Triggers.IDLE;
         }
-
+                                                                                                                           
         private void FixedUpdate()
         { 
-            if (!GameManager.Instance.inGame) return;
+            if (!_gameManager.inGame) return;
             MoveToward(_moveDirection != Vector2.zero ? _moveDirection : Vector2.zero);
         }
 

@@ -7,6 +7,8 @@ namespace _1.Script.InGameUI
 {
     public class StatusBarScript : MonoBehaviour
     {
+        private GameManager _gameManager;
+
         #region UnderBar UI Variables
         [SerializeField] private Button openUserBtn;    // 오픈 버튼 오브젝트
         #endregion
@@ -28,7 +30,6 @@ namespace _1.Script.InGameUI
             openUserBtn.onClick.AddListener(OpenSideBar);   // 사이드바 onClick Open Event
             closeBtn.onClick.AddListener(CloseSideBar); // 사이드바 onClick Close Event
             sidebar.gameObject.SetActive(false);    // 사이드바 오브젝트 초기 값 (비활성화)
-            
         }
         #endregion
 
@@ -37,7 +38,9 @@ namespace _1.Script.InGameUI
         /// </summary>
         private void Start()
         {
-            GameManager.Instance.OnUser += InstantiateUser;
+            _gameManager = ServiceLocator.GetService<GameManager>();
+            Debug.Log("StatusBar Script.cs - OnUser Event Subscribe");
+            _gameManager.OnUser += InstantiateUser;
         }
 
         /// <summary>
@@ -63,6 +66,7 @@ namespace _1.Script.InGameUI
         /// <param name="user"></param>
         private void InstantiateUser(Dictionary<string, Sprite> user)
         {
+            Debug.Log("StatusBar Script.cs - InstantiateUser Method");
             foreach (var info in user)
             {
                 Users userInstance = Instantiate(userPrefab, contentTransform);
