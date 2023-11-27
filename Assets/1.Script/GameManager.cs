@@ -10,6 +10,19 @@ namespace _1.Script
 {
     public class GameManager : MonoBehaviour
     {
+        #region Character Information Variable
+        public CharacterTypes CharacterType { get; set; }   // 케릭터 타입
+        private Sprite _characterThumbnail; // 이미지 변수
+        public event Action<Sprite> OnCharacterThumbnailChanged;    // 이미지 변경 이벤트 
+        private AnimatorController _characterController;    // 컨트롤러
+        public event Action<AnimatorController> OnCharacterControllerChanged;   // 컨트롤러 변경 이벤트
+        #endregion
+
+        #region UserInstance Setting
+        private Dictionary<string, Sprite> _user = new Dictionary<string, Sprite>(); //  케릭터 이름 변수
+        public event Action<Dictionary<string, Sprite>> OnUser;   //  이름 세팅 이벤트  
+        #endregion
+
         #region Singleton to GameManager
         public static GameManager Instance { get; private set; }
 
@@ -28,19 +41,6 @@ namespace _1.Script
             }
             DontDestroyOnLoad(gameObject);
         }
-        #endregion
-
-        #region Character Information Variable
-        public CharacterTypes CharacterType { get; set; }   // 케릭터 타입
-        private Sprite _characterThumbnail; // 이미지 변수
-        public event Action<Sprite> OnCharacterThumbnailChanged;    // 이미지 변경 이벤트 
-        private AnimatorController _characterController;    // 컨트롤러
-        public event Action<AnimatorController> OnCharacterControllerChanged;   // 컨트롤러 변경 이벤트
-        #endregion
-
-        #region UserInstance Setting
-        private Dictionary<string, Sprite> _user = new Dictionary<string, Sprite>(); //  케릭터 이름 변수
-        public event Action<Dictionary<string, Sprite>> OnUser;   //  이름 세팅 이벤트  
         #endregion
 
         #region Changed Character Information Event Property

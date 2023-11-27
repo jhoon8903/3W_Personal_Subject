@@ -13,6 +13,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/1.Script/InGameUI/StatusBarScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/1.Script/LoginPanel/CharacterCard.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/1.Script/NPC/NPC.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_SubMeshUI.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d782bc2bede34e66b4df18f3f7c51ec7171a00/6c/8f706143/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -93,7 +94,7 @@
       <workItem from="1700934406392" duration="249000" />
       <workItem from="1700934672454" duration="8528000" />
       <workItem from="1700987890523" duration="11925000" />
-      <workItem from="1701000963364" duration="22154000" />
+      <workItem from="1701000963364" duration="30339000" />
     </task>
     <servers />
   </component>

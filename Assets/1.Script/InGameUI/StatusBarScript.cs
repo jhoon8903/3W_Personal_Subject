@@ -32,18 +32,24 @@ namespace _1.Script.InGameUI
         #endregion
 
         /// <summary>
-        ///  GameMaanger의 OnUser 이벤트 구독
+        ///  GameManager의 OnUser 이벤트 구독
         /// </summary>
         private void Start()
         {
-            GameManager.Instance.OnUser += InstantiateUser;
+              GameManager.Instance.OnUser += InstantiateUser;
         }
 
+        /// <summary>
+        ///     사이드 바 오픈 메서드 (OnClick)
+        /// </summary>
         private void OpenSideBar()
         {
             sidebar.gameObject.SetActive(true);
         }
 
+        /// <summary>
+        ///     사이드 바 클로즈 메서드 (OnClick)
+        /// </summary>
         private void CloseSideBar()
         {
             sidebar.gameObject.SetActive(false);
@@ -57,7 +63,8 @@ namespace _1.Script.InGameUI
         private void InstantiateUser(Dictionary<string, Sprite> user)
         {
             foreach (var info in user)
-            {
+            { 
+                Debug.Log($"Name : {info.Key}");
                 Users userInstance = Instantiate(userPrefab, contentTransform);
                 userInstance.SetInformation(info.Key, info.Value);
             }
