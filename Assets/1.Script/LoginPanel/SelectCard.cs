@@ -1,8 +1,6 @@
-using System;
 using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.UI;
-using static _1.Script.LoginPanel.CharacterCard.Character;
 
 namespace _1.Script.LoginPanel
 {
@@ -12,7 +10,7 @@ namespace _1.Script.LoginPanel
 
         #region Character Card Variables
         // 해당 케릭터가 인스턴화 될 때 설정되는 케릭터 정보
-        public CharacterTypes CharacterType { get; set; }
+        public GameManager.Character.CharacterTypes CharacterType { get; set; }
         public Sprite CharacterSprite { get; set; }
         public AnimatorController Controller { get; set; }
         #endregion

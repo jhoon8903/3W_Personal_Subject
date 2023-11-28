@@ -38,7 +38,7 @@ namespace _1.Script.Controller
         public void OnLookForward(InputValue value)
         {
             // 매개변수로 받은 벨류값에서 Vector2를 찾음
-            Vector2 lookValue = value.Get<Vector2>();
+            Vector2 lookValue = value.Get<Vector2>().normalized;
         
             // 마우스 좌표는 카메라의 좌표와는 다르기 때문에 혀재 스크린의 좌표로 변환
             // Vector2 worldPos = _camera.ScreenToWorldPoint(lookValue);

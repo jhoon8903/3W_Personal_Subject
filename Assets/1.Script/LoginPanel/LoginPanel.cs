@@ -98,7 +98,7 @@ namespace _1.Script.LoginPanel
         /// </summary>
         private void ClosePanel()
         {
-            _gameManager.inGame = true;
+            _gameManager.InGame = true;
             _inputPanel.gameObject.SetActive(false);    // 인풋 패널을 비활성화 하여 게임씬 노출
         }
         #endregion

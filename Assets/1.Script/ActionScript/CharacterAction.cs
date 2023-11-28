@@ -43,6 +43,8 @@ namespace _1.Script.ActionScript
         private void UpdateAnimatorController(AnimatorController newController)
         {
             animator.runtimeAnimatorController = newController;
+            animator.SetTrigger(_trigger.ToString());
+            _trigger = Triggers.IDLE;
         }
 
         private void CharacterInitialize()
@@ -54,7 +56,7 @@ namespace _1.Script.ActionScript
                                                                                                                            
         private void FixedUpdate()
         { 
-            if (!_gameManager.inGame) return;
+            if (!_gameManager.InGame) return;
             MoveToward(_moveDirection != Vector2.zero ? _moveDirection : Vector2.zero);
         }
 
