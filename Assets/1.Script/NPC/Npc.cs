@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static _1.Script.GameManager.Character;
 
 namespace _1.Script.NPC
 {
@@ -27,12 +28,8 @@ namespace _1.Script.NPC
         }
 
         private void SetUpNpc()
-        { 
-            Debug.Log("Npc.cs - SetupNPC Method()");
-            _gameManager.User = new Dictionary<string, Sprite>
-            {
-                {npcNameText, npcSprite }
-            };
+        {
+            _gameManager.CreateNpc(this, npcName.text, npcSprite, CharacterTypes.NPC);
         }
     }
 }

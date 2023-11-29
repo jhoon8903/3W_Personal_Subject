@@ -14,6 +14,7 @@ namespace _1.Script.InGameUI
         private Button _selectBtn;
         private GameManager _gameManager;
         private AnimatorController _controller;
+        private CharacterTypes _characterType;
 
         /// <summary>
         ///  GameManager Service 등록
@@ -35,15 +36,19 @@ namespace _1.Script.InGameUI
         {
             avatar.sprite = avatarSprite;
             avatarName.text = type.ToString();
+            _characterType = type;
             _controller = controller;
         }
 
         /// <summary>
         ///  선탣된 아바타의 컨르롤러 정보를 GameManager에 전달
+        ///  변경된 아바타 Sprite 또한 전달 해서 User 인스턴스가 변경 되도록 합니다.
         /// </summary>
         private void SelectedAvatar()
         {
+            _gameManager.CharacterTypeChanged = _characterType;
             _gameManager.CharacterController = _controller;
+            _gameManager.CharacterThumbnail = avatar.sprite;
             _gameManager.ClosePanel(this);
         }
     }

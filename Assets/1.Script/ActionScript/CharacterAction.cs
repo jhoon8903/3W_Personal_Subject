@@ -1,4 +1,6 @@
 using _1.Script.Controller;
+using _1.Script.InGameUI;
+using TMPro;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -8,7 +10,9 @@ namespace _1.Script.ActionScript
     {
         private GameManager _gameManager;
         private MovementEventController _movementEventController;
-        
+
+        [SerializeField] private TextMeshProUGUI characterName;
+
         #region Move Variables
         [SerializeField] private float speed;
         private Vector2 _moveDirection;
@@ -25,6 +29,8 @@ namespace _1.Script.ActionScript
         private Triggers _trigger;
         #endregion
 
+        private GameManager.Character.CharacterTypes _characterType;
+
         private void Awake()
         {
             _movementEventController = GetComponent<MovementEventController>();
@@ -37,7 +43,28 @@ namespace _1.Script.ActionScript
             _movementEventController.MoveEvent += Move;
             _movementEventController.LookForwardEvent += LookForward;
             _gameManager.OnCharacterControllerChanged += UpdateAnimatorController;
+            // 이름변경 이벤트 감지 시 UpdateName 메서드 실행  
+            _gameManager.OnChangedName += UpdateName;
+            _gameManager.OnCharacterTypeChanged += ChangedType;
             CharacterInitialize();
+        }
+
+        private void ChangedType(GameManager.Character.CharacterTypes obj)
+        {
+            _characterType = obj;
+        }
+
+        /// <summary>
+        ///  현재 이름과 비교하여 OldName과 현재 이름이 같다면, 새로운 이름으로 교체 합니다.
+        /// </summary>
+        /// <param name="sender"> 발신자 정보 </param>
+        /// <param name="e">e.OldName, e.NewName</param>
+        private void UpdateName(object sender, NameChangedEventArgs e)
+        {
+            if (e.OldName == characterName.text)
+            {
+                characterName.text = e.NewName;
+            }
         }
 
         private void UpdateAnimatorController(AnimatorController newController)
@@ -57,6 +84,7 @@ namespace _1.Script.ActionScript
         private void FixedUpdate()
         { 
             if (!_gameManager.InGame) return;
+            if (_gameManager.InGameChangingName) return;
             MoveToward(_moveDirection != Vector2.zero ? _moveDirection : Vector2.zero);
         }
 

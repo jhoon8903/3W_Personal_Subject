@@ -13,11 +13,7 @@ namespace _1.Script
         public event Action<Sprite> OnCharacterThumbnailChanged;    // 이미지 변경 이벤트 
         private AnimatorController _characterController;    // 컨트롤러
         public event Action<AnimatorController> OnCharacterControllerChanged;   // 컨트롤러 변경 이벤트
-        #endregion
-
-        #region UserInstance Setting
-        private Dictionary<string, Sprite> _user = new Dictionary<string, Sprite>(); //  케릭터 이름 변수
-        public event Action<Dictionary<string, Sprite>> OnUser;   //  이름 세팅 이벤트  
+        public event Action<Character.CharacterTypes> OnCharacterTypeChanged;
         #endregion
 
         #region Character InformationList
@@ -27,12 +23,11 @@ namespace _1.Script
         /// </summary>
         [Serializable] public class Character
         {
-            public enum CharacterTypes { FROG, PINKYMAN, ZEP }   // 케릭터의 유니크 타입 목록
+            public enum CharacterTypes { FROG, PINKYMAN, ZEP, NPC }   // 케릭터의 유니크 타입 목록
             public CharacterTypes characterType;    // 케릭터의 유니크 타입값
             public Sprite characterImage;   // 케릭터의 기본 Sprite 
             public AnimatorController animator; // 인게임에서 사용할 케릭터 컨트롤러
         }
-
         [SerializeField] public List<Character> characters;    // Character Class를 리스트 형태로 관리
         #endregion
 
@@ -42,7 +37,6 @@ namespace _1.Script
         /// </summary>
         private void Awake()
         {
-            Debug.Log("GameManager.cs - Register Service");
             ServiceLocator.RegisterService(this);
         }
         #endregion
@@ -74,16 +68,30 @@ namespace _1.Script
             }
         }
 
-        /// <summary>
-        ///     케릭터 이름 세팅 프로퍼티 및 이벤트 실행
-        /// </summary>
-        public Dictionary<string, Sprite> User
+        public Character.CharacterTypes CharacterTypeChanged
         {
+            get => CharacterType;
             set
             {
-                _user = value;
-                OnUser?.Invoke(_user);
+                CharacterType = value;
+                OnCharacterTypeChanged?.Invoke(CharacterType);
             }
+        }
+
+        /// <summary>
+        ///  이름을 바꾸는 이벤트 핸들러
+        /// </summary>
+        public event EventHandler<NameChangedEventArgs> OnChangedName;
+        private string _currentName;
+        public void ChangeName(object sender, string  newName)
+        {
+            if (sender is LoginPanel.LoginPanel)
+            {
+                _currentName = null;
+            }
+            var args = new NameChangedEventArgs(_currentName, newName);
+            _currentName = newName;
+            OnChangedName?.Invoke(sender, args);
         }
         #endregion
 
@@ -93,8 +101,17 @@ namespace _1.Script
             OnClosePanelHandler?.Invoke(sender, EventArgs.Empty);
         }
 
+        public event EventHandler<CreateNPCEventArgs> OnCreateNpc;
+
+        public void CreateNpc(object sender, string npcName, Sprite npcSprite, Character.CharacterTypes type)
+        {
+            var args = new CreateNPCEventArgs(npcName, npcSprite, type);
+            OnCreateNpc?.Invoke(sender, args);
+        }
+
         #region Reject Move
-        public bool InGame { get; set; } = false;
+        public bool InGame { get; set; }
+        public bool InGameChangingName { get; set; }
         #endregion
     }
 }

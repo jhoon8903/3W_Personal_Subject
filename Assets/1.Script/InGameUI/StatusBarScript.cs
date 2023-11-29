@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +18,11 @@ namespace _1.Script.InGameUI
         [SerializeField] private Transform contentTransform;    // 인스턴스가 생성 될 부모 오브젝트 위치
         #endregion
 
+        private string _userName;
+        private Sprite _userSprite;
+        private GameManager.Character.CharacterTypes _type;
+        private Users _userInstance; 
+
         #region Initilaze UI Instance
         /// <summary>
         ///     인게임 UI Initialize
@@ -38,8 +42,31 @@ namespace _1.Script.InGameUI
         private void Start()
         {
             _gameManager = ServiceLocator.GetService<GameManager>();
-            Debug.Log("StatusBar Script.cs - OnUser Event Subscribe");
-            _gameManager.OnUser += InstantiateUser;
+            _gameManager.OnChangedName += UserNameSetup;
+            _gameManager.OnCharacterThumbnailChanged += UserSpriteSetUp;
+            _gameManager.OnCharacterTypeChanged += TypeChange;
+            _gameManager.OnCreateNpc += CreateNpc;
+        }
+
+        private void TypeChange(GameManager.Character.CharacterTypes obj)
+        {
+            _type = obj;
+        }
+
+        private void CreateNpc(object sender, CreateNPCEventArgs e)
+        {
+            Users npcInstance = Instantiate(userPrefab, contentTransform);
+            npcInstance.SetInformation(e.NPCName, e.NPCSprite, _type);
+        }
+
+        private void UserSpriteSetUp(Sprite obj)
+        {
+            _userSprite = obj;
+        }
+
+        private void UserNameSetup(object sender, NameChangedEventArgs e)
+        {
+            _userName = e.NewName;
         }
 
         /// <summary>
@@ -47,6 +74,7 @@ namespace _1.Script.InGameUI
         /// </summary>
         private void OpenSideBar()
         {
+            InstantiateUser();
             sidebar.gameObject.SetActive(true);
         }
 
@@ -58,19 +86,11 @@ namespace _1.Script.InGameUI
             sidebar.gameObject.SetActive(false);
         }
 
-        /// <summary>
-        ///     Callback 으로 메서드가 실행되면 Instantiate로 프리팹을 인스턴스화 하고
-        ///     이벤트에서 전달 받은 메서드를 Users 인스턴스에 세팅합니다.
-        /// </summary>
-        /// <param name="user"></param>
-        private void InstantiateUser(Dictionary<string, Sprite> user)
+        private void InstantiateUser()
         {
-            Debug.Log("StatusBar Script.cs - InstantiateUser Method");
-            foreach (var info in user)
-            {
-                Users userInstance = Instantiate(userPrefab, contentTransform);
-                userInstance.SetInformation(info.Key, info.Value);
-            }
+            if (_userInstance != null) return;
+            _userInstance = Instantiate(userPrefab, contentTransform);
+            _userInstance.SetInformation(_userName, _userSprite, _type);
         }
     }
 }

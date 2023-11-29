@@ -22,6 +22,8 @@ namespace _1.Script.LoginPanel
         [SerializeField] private Image characterThumbnail;  //  케릭터 선택 버튼 위에 보여줄 케릭터 이미지
         #endregion
 
+        private GameManager.Character.CharacterTypes _type;
+
         #region Initialize Default Value
         /// <summary>
         ///  LoginPanel 초기화 메서드
@@ -87,10 +89,13 @@ namespace _1.Script.LoginPanel
         {
             characterName.text = value; // 케릭터 이름 할당
             entranceBtn.interactable = value.Length is >= 2 and < 10;   // 2자 이상 10자 미만
-            _gameManager.User = new Dictionary<string, Sprite>  // GameManager에 이름과 Sprite를 넘겨 줌
-            {
-                {value, characterThumbnail.sprite}
-            };
+            // _gameManager.User = new Dictionary<string, Sprite>  // GameManager에 이름과 Sprite를 넘겨 줌
+            // {
+            //     {value, characterThumbnail.sprite}
+            // };
+            _gameManager.CharacterThumbnail = characterThumbnail.sprite;
+            _gameManager.CharacterTypeChanged = _type;
+            _gameManager.ChangeName(this,value);
         }
 
         /// <summary>
