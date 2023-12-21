@@ -28,8 +28,10 @@ namespace _1.Script
             public Sprite characterImage;   // 케릭터의 기본 Sprite 
             public AnimatorController animator; // 인게임에서 사용할 케릭터 컨트롤러
         }
+
         [SerializeField] public List<Character> characters;    // Character Class를 리스트 형태로 관리
         #endregion
+
 
         #region Service Locator to GameManager
         /// <summary>
@@ -40,6 +42,7 @@ namespace _1.Script
             ServiceLocator.RegisterService(this);
         }
         #endregion
+
 
         #region Changed Character Information Event Property
         /// <summary>
@@ -55,6 +58,7 @@ namespace _1.Script
             }
         }
 
+
         /// <summary>
         ///  Controller 변경 시 이벤트 변경
         /// </summary>
@@ -68,6 +72,7 @@ namespace _1.Script
             }
         }
 
+
         public Character.CharacterTypes CharacterTypeChanged
         {
             get => CharacterType;
@@ -77,6 +82,7 @@ namespace _1.Script
                 OnCharacterTypeChanged?.Invoke(CharacterType);
             }
         }
+
 
         /// <summary>
         ///  이름을 바꾸는 이벤트 핸들러
@@ -95,14 +101,15 @@ namespace _1.Script
         }
         #endregion
 
+
         public event EventHandler OnClosePanelHandler;
         public void ClosePanel(object sender)
         {
             OnClosePanelHandler?.Invoke(sender, EventArgs.Empty);
         }
 
-        public event EventHandler<CreateNPCEventArgs> OnCreateNpc;
 
+        public event EventHandler<CreateNPCEventArgs> OnCreateNpc;
         public void CreateNpc(object sender, string npcName, Sprite npcSprite, Character.CharacterTypes type)
         {
             var args = new CreateNPCEventArgs(npcName, npcSprite, type);
